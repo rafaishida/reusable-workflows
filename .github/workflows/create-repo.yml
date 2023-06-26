@@ -26,12 +26,13 @@ jobs:
 
 
         - name: Cria Repo Github
-          uses: ./.github/actions
-          id: create-app
+          uses: octobay/create-repository-action@v1
           with:
-            nome: ${{ fromJson(inputs.payload)['Nome da aplicação'] }}
-            template: ${{ fromJson(inputs.payload)['Template'] }}
-            token: ${{ secrets.GITHUB_TOKEN }}
+            name: ${{ steps.create-repo.outputs.repo_name}}
+            org: ''
+            access-token: ${{ secrets.GITHUB_TOKEN }}
+            private-repo: false
+            initalize-repo: true
 
         - name: Teste
           run:
