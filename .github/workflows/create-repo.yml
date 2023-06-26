@@ -38,8 +38,8 @@ jobs:
           uses: ./.github/actions
           id: create-app
           with:
-            nome: ${{ fromJson(inputs.payload}['Nome da aplicação'] }}
-            template: ${{ fromJson(inputs.payload}['Template'] }}
+            nome: ${{ fromJson(inputs.payload)['Nome da aplicação'] }}
+            template: ${{ fromJson(inputs.payload)['Template'] }}
             token: ${{ steps.get_workflow_token.outputs.token }}
 
         - name: Teste
