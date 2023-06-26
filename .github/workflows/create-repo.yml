@@ -1,4 +1,4 @@
-nome: Create repo
+name: Create repo
 
 on:
     workflow_call:
