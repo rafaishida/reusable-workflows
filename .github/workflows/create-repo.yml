@@ -23,16 +23,20 @@ jobs:
         recurso: ${{ steps.create-repo.outputs.recurso }}
         repo_name: ${{ steps.create-repo.outputs.repo_name }}
       steps:
-
-
-        - name: Cria Repo Github
-          uses: octobay/create-repository-action@v1
+      
+        - name: Use Node.js
+          uses: actions/setup-node@v2
+        - name: Creating GitHub Organization Repository
+          uses: repo-ctrl/create-repo-action@main 
+          id: create-repo
           with:
-            name: ${{ steps.create-repo.outputs.repo_name}}
-            org: ''
-            access-token: ${{ secrets.GITHUB_TOKEN }}
-            private-repo: false
-            initalize-repo: true
+            repo-name: ${{ steps.create-repo.outputs.repo_name}}
+            org-admin-token: ${{ secrets.GITHUB_TOKEN }}
+        - name: Log URL to the repo
+          run: 
+            echo "The new repo is ${{ steps.create-repo.outputs.repo-url }}"
+
+
 
         - name: Teste
           run:
