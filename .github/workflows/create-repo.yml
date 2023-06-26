@@ -6,11 +6,7 @@ on:
         payload:
           required: true
           type: string
-      secrets:
-        APPLICATION_ID:
-          required: true
-        APP_PRIVATE_KEY:
-          required: true
+  
       outputs:
         recurso:
           description: "recurso"
@@ -27,12 +23,7 @@ jobs:
         recurso: ${{ steps.create-repo.outputs.recurso }}
         repo_name: ${{ steps.create-repo.outputs.repo_name }}
       steps:
-        - name: Get token
-          id: get_workflow_token
-          uses: peter-murray/workflow-application-token-action@v2
-          with:
-            application_id: ${{ secrets.SETUP_APP_ID }}
-            application_private_key: ${{ secrets.SETUP_APP_PRIVATE_KEY }}
+
 
         - name: Cria Repo Github
           uses: ./.github/actions
@@ -40,7 +31,7 @@ jobs:
           with:
             nome: ${{ fromJson(inputs.payload)['Nome da aplicação'] }}
             template: ${{ fromJson(inputs.payload)['Template'] }}
-            token: ${{ steps.get_workflow_token.outputs.token }}
+            token: ${{ secrets.GITHUB_TOKEN }}
 
         - name: Teste
           run:
