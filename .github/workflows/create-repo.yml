@@ -25,13 +25,10 @@ jobs:
       steps:
       
         - name: Use Node.js
-          uses: actions/setup-node@v2
-        - name: Creating GitHub Organization Repository
-          uses: repo-ctrl/create-repo-action@main 
-          id: create-repo
-          with:
-            repo-name: ${{ steps.create-repo.outputs.repo_name}}
-            org-admin-token: ${{ secrets.GITHUB_TOKEN }}
+          run: 
+            echo "2"
+            git clone --depth 1 https://github.com/$OWNER/$TEMPLATE_REPO.git $NEW_REPO
+             ls
         - name: Log URL to the repo
           run: 
             echo "The new repo is ${{ steps.create-repo.outputs.repo-url }}"
